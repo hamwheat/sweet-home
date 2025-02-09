@@ -49,6 +49,38 @@ const fullPageOptions = reactive({
 
 <style lang="scss" scoped>
 
+.section {
+  overflow: hidden;
+
+  &::before {
+    //content: "";
+    //position: absolute;
+    //left: 18%;
+    //bottom: 0%;
+    //width: 60%;
+    //height: 600px;
+    //background-image: linear-gradient(0deg, var(--text-color-light), transparent);
+    //z-index: 5;
+    //border-radius: 0px;
+    //transform: rotate3d(1, 1, 1, 45deg) translateY(388px);
+  }
+
+  &::after {
+    //content: "";
+    //position: absolute;
+    //right: 0%;
+    //top: 50%;
+    //transform: translateY(-50%);
+    //bottom: 0;
+    //width: 40px;
+    //height: 100%;
+    //background-image: linear-gradient(-90deg, #0000001c, transparent);
+    //z-index: 9;
+    //border-radius: 0 10px 10px 0;
+  }
+
+}
+
 /* 背景色 */
 .fp-section:nth-child(1) {
   background-color: var(--background-color);
