@@ -4,7 +4,13 @@
       <div class="stars">
         <div v-for="i in 60" :key="i" class="star"></div>
       </div>
-      <div class="moon"></div>
+<!--      <div class="moon"></div>-->
+      <div class="moon">
+        <div class="moon-hole-1"></div>
+        <div class="moon-hole-2"></div>
+        <div class="moon-hole-3"></div>
+        <div class="moon-halo"></div>
+      </div>
       <div class="mountains">
         <div v-for="i in 4" :key="i" class="mountain"></div>
       </div>
@@ -252,15 +258,104 @@ $boatSpeed: 100s;
   }
 }
 
+//.moon {
+//  width: 80px;
+//  height: 80px;
+//  border-radius: 50%;
+//  background-color: $x-light;
+//  top: 25%;
+//  right: 10%;
+//  z-index: 2;
+//  box-shadow: 0 0 10px $x-light, 0 0 20px $x-light, 0 0 30px $x-light, 0 0 40px $x-light, 0 0 50px $x-light, 0 0 100px $x-light;
+//}
+
 .moon {
-  width: 80px;
-  height: 80px;
+  width: 125px;
+  height: 125px;
+  z-index: 4;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  background-color: #fff;
   border-radius: 50%;
-  background-color: $x-light;
   top: 25%;
   right: 10%;
-  z-index: 2;
-  box-shadow: 0 0 10px $x-light, 0 0 20px $x-light, 0 0 30px $x-light, 0 0 40px $x-light, 0 0 50px $x-light, 0 0 100px $x-light;
+  transform: translate(-50%, -50%);
+
+  .moon-hole-1 {
+    width: 35px;
+    height: 35px;
+    background-color: #f0f0e3;
+    border-radius: 50%;
+    left: 60%;
+    top: 50%;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+
+  .moon-hole-2 {
+    width: 13px;
+    height: 13px;
+    background-color: #f0f0e3;
+    left: 84%;
+    top: 55%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+
+  .moon-hole-3 {
+    width: 20px;
+    height: 20px;
+    background-color: #f0f0e3;
+    left: 65%;
+    top: 75%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+
+  .moon-halo {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    opacity: 0.2;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    transform-origin: 0 0;
+    animation: shine 3s ease-in-out infinite alternate;
+
+    &:before {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      opacity: 0.2;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      transform-origin: 0 0;
+      animation-delay: 200ms;
+      animation: shine 3s ease-in-out infinite alternate;
+    }
+
+    &:after {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      opacity: 0.2;
+      width: 222px;
+      height: 222px;
+      border-radius: 50%;
+      transform-origin: 0 0;
+      animation-delay: 400ms;
+      animation: shine 3s ease-in-out infinite alternate;
+    }
+
+  }
+
 }
 
 .lighthouse-group {
@@ -363,7 +458,7 @@ $boatSpeed: 100s;
         width: 0;
         height: 0;
         left: -3px;
-        bottom: 40px;
+        bottom: 43px;
         border-left: 50px solid rgba(255, 255, 255, 0);
         border-right: 50px solid rgba(255, 255, 255, 0);
         border-bottom: 40px solid $x-dark;
@@ -490,6 +585,15 @@ $boatSpeed: 100s;
   }
   75% {
     transform: perspective(500px) rotateY(-100deg);
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: scale(1) translate(-50%, -50%);
+  }
+  100% {
+    transform: scale(1.02) translate(-50%, -50%);
   }
 }
 </style>
