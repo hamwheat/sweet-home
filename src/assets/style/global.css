@@ -7,16 +7,11 @@
  */
 
 :root {
-    /*--background-color: #001925;*/
-    /*--vic-background-color: #002733;*/
     --background-color: #1a1a1a;
     --vic-background-color: #212121;
     --text-color: #ffffff;
     --text-color-light: rgba(230, 236, 237, 0.3);
-
     --primary-color: rgba(129,140,248,1);
-
-
 
 }
 

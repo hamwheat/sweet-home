@@ -83,7 +83,10 @@ const fullPageOptions = reactive({
 
 /* 背景色 */
 .fp-section:nth-child(1) {
-  background-color: var(--background-color);
+  //background-color: var(--background-color);
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: normal !important;
 }
 
 .fp-section:nth-child(2) {
