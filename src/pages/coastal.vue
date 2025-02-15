@@ -4,7 +4,6 @@
       <div class="stars">
         <div v-for="i in 60" :key="i" class="star"></div>
       </div>
-<!--      <div class="moon"></div>-->
       <div class="moon">
         <div class="moon-hole-1"></div>
         <div class="moon-hole-2"></div>
@@ -17,10 +16,23 @@
       <div class="sea">
         <div v-for="i in 30" :key="i" class="wave"></div>
         <div class="boat">
-          <div class="sail"></div>
-          <div class="sail"></div>
-          <div class="base"></div>
+          <div class="boat-bottom">
+            <div class="squares">
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+              <div class="square"></div>
+            </div>
+          </div>
+          <div class="boat-behind"></div>
+          <div class="boat-top-left"></div>
+          <div class="boat-top-right"></div>
         </div>
+        <!--        <div class="boat">-->
+        <!--          <div class="sail"></div>-->
+        <!--          <div class="sail"></div>-->
+        <!--          <div class="base"></div>-->
+        <!--        </div>-->
       </div>
     </div>
     <div class="lighthouse-group">
@@ -49,10 +61,15 @@
 </template>
 
 <script setup>
+import {ref} from "vue";
+
+let isDoom = ref(false) // 是否开启doom模式
 
 </script>
 
 <style scoped lang="scss">
+@use "sass:math";
+
 $x-dark: #29284c;
 $dark: #4c4b82;
 $medium: #717ae1;
@@ -62,7 +79,7 @@ $aqua: #75e2fa;
 $grey: #9e9ebe;
 $yellow: #f7f2b4;
 
-$boatSpeed: 100s;
+$boatSpeed: 80s;
 
 *, *:before, *:after {
   box-sizing: inherit;
@@ -150,13 +167,9 @@ $boatSpeed: 100s;
   bottom: 0;
   left: 0;
   z-index: 4;
-  background: linear-gradient(
-          to top,
-          $x-dark 0%,
-          $dark 30%,
-          $medium 60%,
-          $aqua 90%
-  );
+  //background: linear-gradient(#5748cc, #3c709b);
+  background: linear-gradient($dark, $medium);
+  opacity: 0.6;
 
   .wave {
     background-color: $light;
@@ -166,70 +179,148 @@ $boatSpeed: 100s;
   }
 
   @for $i from 1 through (30) {
-    $size: random(100) + 50px;
+    $size: math.random(100) + 50px;
     .wave:nth-of-type(#{$i}) {
-      bottom: random(170) + px;
-      left: random(100) + vw;
+      bottom: math.random(170) + px;
+      left: math.random(100) + vw;
       width: $size;
-      opacity: random(5) * 0.1;
-      animation-delay: random(3) + s;
+      opacity: math.random(5) * 0.1;
+      animation-delay: math.random(3) + s;
       animation: wave 5s linear infinite;
     }
   }
 }
 
 .boat {
-  width: 90px;
-  height: 90px;
+  height: 150px;
+  width: 120px;
+  z-index: 3;
   bottom: 90px;
+  opacity: 1;
   animation: boat $boatSpeed linear infinite;
 
   &:after {
-    height: 8px;
-    width: 200px;
-    background: linear-gradient(90deg, transparentize($x-light, 0.3) 30%, rgba(255, 255, 255, 0) 100%);
-    top: 105px;
-    left: 20px;
-    z-index: -1;
-    border-radius: 40%;
-  }
-
-  &:before {
-    width: 92px;
-    height: 50px;
-    left: 25px;
-    bottom: -70px;
-    background: linear-gradient(to bottom, transparentize($x-dark, 0.2) 30%, transparentize($x-dark, 1) 100%);
-    z-index: -1;
-    animation: boatShadow $boatSpeed linear infinite;
-  }
-
-  .base {
-    width: 110px;
-    height: 25px;
-    bottom: -20px;
-    background-color: $dark;
-    clip-path: polygon(20% 100%, 0 0, 100% 0, 100% 100%);
-  }
-
-  .sail:nth-child(1) {
-    width: 90px;
-    height: 80px;
-    left: 5px;
-    background-image: linear-gradient($light 0%, $dark 70%);
-    clip-path: polygon(0 100%, 50% 0, 50% 100%);
-  }
-
-  .sail:nth-child(2) {
     width: 80px;
-    height: 70px;
-    left: 15px;
-    bottom: 10px;
+    height: 50px;
+    left: 22px;
+    bottom: -50px;
+    background-image: linear-gradient(to bottom, #6d1e5a 0%, transparent 100%);
+    z-index: -1;
+    animation: boatShadow 100s linear infinite;
+  }
+
+  .boat-bottom {
+    bottom: 0;
+    left: 0;
+    -webkit-clip-path: polygon(0 70%, 100% 70%, 85% 100%, 15% 100%);
+    clip-path: polygon(0 70%, 100% 70%, 85% 100%, 15% 100%);
+    background-color: $x-dark;
+    width: 100%;
+    height: 100px;
+
+    &:before {
+      left: 0;
+      bottom: 0;
+      height: 100%;
+      width: 50%;
+      background-color: $x-dark;
+    }
+
+    &:after {
+      background-color: $x-dark;
+      width: 50%;
+      height: 10px;
+      left: 0;
+      bottom: 10px;
+    }
+
+    .squares {
+      width: 100%;
+      height: 8px;
+      bottom: 20px;
+      left: 2px;
+    }
+
+    .square {
+      background-color: #ffad54;
+      width: 5px;
+      height: 5px;
+      bottom: 0px;
+    }
+
+    .square:nth-of-type(1) {
+      left: 10px;
+    }
+
+    .square:nth-of-type(2) {
+      left: 40px;
+    }
+
+    .square:nth-of-type(3) {
+      left: 70px;
+    }
+
+    .square:nth-of-type(4) {
+      left: 100px;
+    }
+  }
+
+  .boat-behind {
+    width: 40px;
+    height: 10px;
+    background-color: $x-dark;
+    bottom: 30px;
+    left: 40px;
+
+    &:after {
+      width: 50%;
+      height: 100%;
+      left: 0;
+      background-color: $x-dark;
+    }
+  }
+
+  .boat-top-left {
+    background-color: $x-dark;
+    -webkit-clip-path: polygon(0% 100%, 50% 0%, 50% 100%);
+    clip-path: polygon(0% 100%, 50% 0%, 50% 100%);
+    width: 95%;
+    height: 75%;
+    bottom: 37px;
+  }
+
+  .boat-top-right {
+    right: 0%;
+    bottom: 37px;
+    width: 95%;
+    height: 60%;
+    background-color: $x-dark;
+    z-index: 33;
+    clip-path: polygon(0% 100%, 50% 0%, 50% 100%);
     transform: scaleX(-1);
-    background-image: linear-gradient($light 0%, $dark 70%);
-    clip-path: polygon(0 100%, 50% 0, 50% 100%);
   }
 }
+
+.boat:nth-of-type(1) {
+  left: 15%;
+  top: 10%;
+  animation: boat 4s infinite ease;
+  // transform:scale(0.8);
+}
+
+.boat:nth-of-type(2) {
+  right: 15%;
+  bottom: 29%;
+  animation: waves 4s infinite ease;
+
+  &:after {
+    transform: scaleX(-1);
+    left: 13%;
+    height: 100px;
+    bottom: -99px
+  }
+}
+
 
 .stars {
   top: 0;
@@ -245,29 +336,18 @@ $boatSpeed: 100s;
   }
 
   @for $i from 1 through (60) {
-    $size: random(4) + px;
-    $top: random(100) + vh;
-    $left: random(100) + vw;
+    $size: math.random(4) + px;
+    $top: math.random(100) + vh;
+    $left: math.random(100) + vw;
     .star:nth-of-type(#{$i}) {
       width: $size;
       height: $size;
       top: $top;
       left: $left;
-      animation-delay: random(5) + s;
+      animation-delay: math.random(5) + s;
     }
   }
 }
-
-//.moon {
-//  width: 80px;
-//  height: 80px;
-//  border-radius: 50%;
-//  background-color: $x-light;
-//  top: 25%;
-//  right: 10%;
-//  z-index: 2;
-//  box-shadow: 0 0 10px $x-light, 0 0 20px $x-light, 0 0 30px $x-light, 0 0 40px $x-light, 0 0 50px $x-light, 0 0 100px $x-light;
-//}
 
 .moon {
   width: 125px;
@@ -393,10 +473,10 @@ $boatSpeed: 100s;
         opacity: 1;
         background-image: linear-gradient(
                 to right,
-                transparentize($x-light, 0.4) 0%,
+                rgba($x-light, 0.6) 0%,
                 $x-dark 8%,
                 transparent 70%,
-                transparentize($x-light, 0.6) 100%
+                rgba($x-light, 0.4) 100%
         );
       }
     }
@@ -458,7 +538,7 @@ $boatSpeed: 100s;
         width: 0;
         height: 0;
         left: -3px;
-        bottom: 43px;
+        bottom: 42px;
         border-left: 50px solid rgba(255, 255, 255, 0);
         border-right: 50px solid rgba(255, 255, 255, 0);
         border-bottom: 40px solid $x-dark;
@@ -560,10 +640,10 @@ $boatSpeed: 100s;
 
 @keyframes boat {
   0% {
-    transform: translateX(120vw) scale(0.8);
+    transform: translateX(100vw) scale(0.8);
   }
   80%, 100% {
-    transform: translateX(-25vw) scale(0.8);
+    transform: translateX(-20vw) scale(0.8);
   }
 }
 
@@ -572,7 +652,7 @@ $boatSpeed: 100s;
     transform: skewX(35deg) translateX(15px);
   }
   50%, 100% {
-    transform: skewX(-55deg) translateX(-40px);
+    transform: skewX(-55deg) translateX(-35px);
   }
 }
 

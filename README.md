@@ -2,7 +2,7 @@
 
 这是一个基于 [Vue.js](https://vuejs.org/) + [Vite](https://vitejs.dev/) 开发的静态网站。
 
-点击查看→ [在线演示](https://hamwheat.github.io/hooton.github.io/)
+点击查看→ [在线演示](https://hamwheat.github.io/sweet-home/)
 
 ### 项目依赖
 

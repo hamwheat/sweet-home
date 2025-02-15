@@ -1,33 +1,42 @@
 <template>
 
-  <nav class="navbar-pc" id="menu">
-    <div class="wrapper">
-      <p class="logo">
-        一个测试页面
-      </p>
-      <ul class="tabs">
-        <li data-menuanchor="welcome">
-          <a :href=" '#' + fullPageOptions.anchors[0] ">欢迎</a>
-        </li>
-        <li data-menuanchor="about">
-          <a :href=" '#' + fullPageOptions.anchors[1] ">关于我</a>
-        </li>
-        <li data-menuanchor="skill">
-          <a :href=" '#' + fullPageOptions.anchors[2] ">技术栈</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<!--  <nav class="navbar-pc" id="menu">-->
+<!--    <div class="wrapper">-->
+<!--      <p class="logo">-->
+<!--        一个测试页面-->
+<!--      </p>-->
+<!--      <ul class="tabs">-->
+<!--        <li data-menuanchor="welcome">-->
+<!--          <a :href=" '#' + fullPageOptions.anchors[0] ">欢迎</a>-->
+<!--        </li>-->
+<!--        <li data-menuanchor="about">-->
+<!--          <a :href=" '#' + fullPageOptions.anchors[1] ">关于我</a>-->
+<!--        </li>-->
+<!--        <li data-menuanchor="skill">-->
+<!--          <a :href=" '#' + fullPageOptions.anchors[2] ">技术栈</a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </nav>-->
 
   <fullPage :options="fullPageOptions">
     <div class="section">
-      <welcome/>
+      <Coastal/>
     </div>
     <div class="section">
-      <about/>
+      <Ocean1/>
     </div>
     <div class="section">
-      <skill/>
+      <Ocean2/>
+    </div>
+    <div class="section">
+      <Ocean3/>
+    </div>
+    <div class="section">
+      <Ocean4/>
+    </div>
+    <div class="section">
+      <Ocean5/>
     </div>
   </fullPage>
 
@@ -35,9 +44,12 @@
 
 <script setup>
 import {reactive} from "vue";
-import Welcome from "@/pages/welcome.vue";
-import About from "@/pages/about.vue";
-import Skill from "@/pages/skill.vue";
+import Coastal from "@/pages/coastal.vue";
+import Ocean1 from "@/pages/ocean1.vue";
+import Ocean2 from "@/pages/ocean2.vue";
+import Ocean3 from "@/pages/ocean3.vue";
+import Ocean4 from "@/pages/ocean4.vue";
+import Ocean5 from "@/pages/ocean5.vue";
 
 const fullPageOptions = reactive({
   licenseKey: 'hahaha', // 产品密钥
@@ -82,6 +94,13 @@ const fullPageOptions = reactive({
 }
 
 /* 背景色 */
+.fp-section {
+  :deep(.fp-overflow) {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .fp-section:nth-child(1) {
   //background-color: var(--background-color);
   display: flex !important;
@@ -90,11 +109,23 @@ const fullPageOptions = reactive({
 }
 
 .fp-section:nth-child(2) {
-  background-color: var(--vic-background-color);
+  background-image: linear-gradient(180deg, #58c8da, #47afb9);
 }
 
 .fp-section:nth-child(3) {
-  background-color: var(--background-color);
+  background-image: linear-gradient(180deg, #47afb9, #30808f);
+}
+
+.fp-section:nth-child(4) {
+  background-image: linear-gradient(180deg, #30808f, #19516a);
+}
+
+.fp-section:nth-child(5) {
+  background-image: linear-gradient(180deg, #19516a, #022244);
+}
+
+.fp-section:nth-child(6) {
+  background-image: linear-gradient(180deg, #022244, #022244);
 }
 
 :deep(.fp-watermark) {
