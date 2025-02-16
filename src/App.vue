@@ -54,7 +54,8 @@ import Ocean5 from "@/pages/ocean5.vue";
 const fullPageOptions = reactive({
   licenseKey: 'hahaha', // 产品密钥
   menu: '#menu', // 菜单
-  anchors: ['welcome', 'about', 'skill'], // 锚点
+  // slidesNavigation: true, // 显示导航
+  anchors: ['Coastal', 'Ocean1', 'Ocean2', 'Ocean3', 'Ocean4', 'Ocean5'], // 锚点
 })
 
 </script>
